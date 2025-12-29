@@ -1,6 +1,6 @@
 # Estadística para Análisis de Datos  
 
-Este repositorio documenta el desarrollo práctico del módulo de **Estadística para Análisis de Datos**, enfocado en el uso de distribuciones probabilísticas, inferencia estadística y validación empírica mediante simulación y análisis reproducible en Python.
+Este repositorio documenta el desarrollo práctico del módulo de Estadística para Análisis de Datos, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, pruebas de hipótesis, análisis de poder y validación empírica mediante simulación y análisis reproducible en Python.
 
 El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, reproducible y orientado a análisis de datos reales.
 
@@ -13,6 +13,7 @@ El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, repro
 - Validar supuestos estadísticos mediante evidencia empírica.
 - Aplicar el Teorema del Límite Central para justificar inferencia paramétrica.
 - Desarrollar análisis reproducibles y documentados para portafolio profesional.
+- Tomar decisiones basadas en datos mediante pruebas de hipótesis, tamaños del efecto y análisis de poder estadístico.
 
 ---
 
@@ -60,11 +61,47 @@ Los datos crudos de comportamiento de clientes no siguen una distribución norma
 
 ---
 
+## Día 2 – Pruebas de Hipótesis y Análisis de Campañas de Marketing
+
+### Actividades realizadas
+- Simulación de un experimento A/B de marketing (grupo control vs tratamiento).
+- Análisis de tasa de conversión mediante prueba de proporciones (Z-test unilateral).
+- Análisis de gasto promedio mediante prueba t para muestras independientes (unilateral).
+- Cálculo de tamaños del efecto:
+  - **Cohen’s h** para proporciones.
+  - **Cohen’s d** para medias.
+- Construcción de intervalos de confianza unilaterales.
+- Análisis de poder estadístico y tamaño muestral requerido.
+- Visualización integrada de resultados y resumen ejecutivo.
+
+---
+
+### Verificación
+
+La prueba de proporciones no rechaza H₀ para la tasa de conversión (Z = 1.12, p = 0.132 > 0.05, h = 0.05), por lo que no se detecta una mejora estadísticamente significativa en conversión. En contraste, la prueba t unilateral rechaza H₀ para el gasto promedio (t = 2.21, p = 0.0136 < 0.05, d = 0.10), indicando un aumento significativo. La implementación de la campaña puede considerarse si el aumento en gasto promedio compensa la ausencia de mejora significativa en conversión considerando el retorno económico, el tamaño del efecto y un poder estadístico moderado (0.71).
+
+---
+
+### Evidencia generada
+- Resultados numéricos de pruebas de hipótesis (Z-test y t-test).
+- Tamaños del efecto (Cohen’s h y d).
+- Intervalo de confianza unilateral para diferencia de gasto.
+- Análisis de poder estadístico y tamaño de muestra requerido.
+- Visualizaciones comparativas y resumen ejecutivo gráfico.
+
+---
+
+### Archivos generados
+- `prueba_hipotesis_marketing_dia2.ipynb`
+- `resultados_marketing_dia2.xlsx`
+- `resultados_prueba_hipotesis_marketing_dia2.png`
+
+---
+
 ## Días Pendientes
 
 Los siguientes días se desarrollarán progresivamente y se documentarán una vez completados.
 
-- Día 2
 - Día 3
 - Día 4
 - Día 5
@@ -115,6 +152,10 @@ estadistica-analisis-datos/
 │   ├── analisis_probabilistico_clientes_reproducible.xlsx
 │   ├── distribuciones_probabilidad_clientes.png
 │   ├── comparacion_modelos_normal_vs_reales.png
+├── dia_2/
+│   ├── prueba_hipotesis_marketing_dia2.ipynb
+│   ├── resultados_marketing_dia2.xlsx
+│   ├── resultados_prueba_hipotesis_marketing_dia2.png
 ├── .gitignore
 
 ```
