@@ -1,6 +1,7 @@
 # Estadística para Análisis de Datos  
 
-Este repositorio documenta el desarrollo práctico del módulo de Estadística para Análisis de Datos, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, análisis de varianza (ANOVA), pruebas de hipótesis, análisis de poder y validación empírica mediante simulación y análisis reproducible en Python.
+Este repositorio documenta el desarrollo práctico del módulo de **Estadística para Análisis de Datos**, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, pruebas de hipótesis, análisis de varianza (ANOVA) y **modelado predictivo mediante regresión lineal**, con validación empírica de supuestos y análisis reproducible en Python.
+
 El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, reproducible y orientado a análisis de datos reales.
 
 ---
@@ -8,12 +9,13 @@ El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, repro
 ## Objetivos Generales
 
 - Comprender y aplicar conceptos fundamentales de probabilidad y estadística.
-- Modelar correctamente el comportamiento de clientes usando distribuciones adecuadas.
-- Validar supuestos estadísticos mediante evidencia empírica.
+- Modelar correctamente el comportamiento de clientes usando distribuciones probabilísticas adecuadas.
+- Validar supuestos estadísticos mediante evidencia empírica y diagnóstico visual.
 - Aplicar el Teorema del Límite Central para justificar inferencia paramétrica.
-- Desarrollar análisis reproducibles y documentados para portafolio profesional.
-- Tomar decisiones basadas en datos mediante pruebas de hipótesis, tamaños del efecto y análisis de poder estadístico.
-- Comparar múltiples grupos mediante ANOVA y pruebas post-hoc, controlando el error tipo I en contextos de negocio reales.
+- Formular y contrastar hipótesis estadísticas para la toma de decisiones basadas en datos.
+- Comparar múltiples grupos mediante ANOVA y pruebas post-hoc, controlando el error tipo I en contextos reales.
+- Construir, evaluar e interpretar **modelos de regresión lineal** con fines explicativos y predictivos.
+- Desarrollar análisis reproducibles, documentados y exportables, orientados a portafolio profesional.
 
 ---
 
@@ -162,11 +164,84 @@ Las pruebas post-hoc con corrección de Bonferroni permiten identificar qué par
 
 ---
 
+## Día 4 – Modelado Predictivo usando Regresión Lineal (CLV)
+
+### Actividades realizadas
+- Simulación y análisis de un dataset de **Customer Lifetime Value (CLV)** con 200 clientes.
+- Análisis exploratorio inicial:
+  - Estadísticas descriptivas del CLV.
+  - Análisis de correlaciones entre CLV y variables explicativas.
+- Construcción de modelos de regresión lineal:
+  - **Modelo simple**: CLV ~ ingresos.
+  - **Modelo múltiple**: CLV ~ ingresos + frecuencia de compras + antigüedad + satisfacción.
+- Estimación de parámetros mediante **Mínimos Cuadrados Ordinarios (OLS)**.
+- Evaluación de desempeño del modelo:
+  - R² y R² ajustado.
+  - RMSE (Error Cuadrático Medio).
+  - AIC para comparación de modelos.
+- Interpretación económica y estadística de los coeficientes.
+- Validación exhaustiva de supuestos:
+  - Normalidad de residuos (Shapiro-Wilk).
+  - Homocedasticidad (Breusch-Pagan).
+  - Independencia (Durbin-Watson).
+  - Multicolinealidad (VIF).
+- Identificación visual de posibles **outliers** mediante gráficos de diagnóstico.
+- Generación de predicción de CLV para un cliente nuevo.
+- Exportación del dataset original y **todas las tablas de resultados** a un único archivo Excel.
+- Generación y guardado de visualizaciones de diagnóstico del modelo.
+
+---
+
+### Pregunta Estadística
+
+¿Es posible explicar y predecir el Valor de Vida del Cliente (CLV) utilizando variables observables del cliente mediante un modelo de regresión lineal?
+
+---
+
+### Hipótesis
+
+- **H₀**: Los coeficientes de las variables explicativas son iguales a cero  
+  (las variables no explican el CLV).
+
+- **H₁**: Al menos uno de los coeficientes es distinto de cero  
+  (existen variables que explican significativamente el CLV).
+
+---
+
+### Verificación
+
+El coeficiente de **ingresos** (β ≈ 0.020) indica que, manteniendo constantes las demás variables, **un aumento de $1 en ingresos incrementa el CLV esperado en aproximadamente $0.02**, es decir, **$20 adicionales en CLV por cada $1.000 de ingresos**. El efecto es estadísticamente significativo (p < 0.001) y su intervalo de confianza no incluye cero, por lo que se rechaza H₀.
+
+Los supuestos del modelo se cumplen adecuadamente: los residuos presentan **normalidad** (Shapiro p > 0.05), **homocedasticidad** (Breusch-Pagan p > 0.05), **independencia** (Durbin-Watson ≈ 2) y **ausencia de multicolinealidad** (VIF ≈ 1). La presencia de posibles valores atípicos observados gráficamente no invalida el modelo, pero podría afectar la estabilidad de las predicciones extremas, por lo que en aplicaciones reales se recomienda un análisis robusto adicional.
+---
+
+### Evidencia generada
+- Estadísticas descriptivas del CLV.
+- Matriz de correlaciones con CLV.
+- Tabla completa de coeficientes del modelo múltiple.
+- Métricas comparativas entre modelo simple y múltiple.
+- Resultados de validación de supuestos.
+- Tabla de VIF para detección de multicolinealidad.
+- Predicción de CLV para un cliente nuevo.
+- Visualizaciones de diagnóstico:
+  - Residuos vs valores ajustados.
+  - Q-Q plot de residuos.
+  - Histograma de residuos.
+  - Residuos vs orden de observación.
+
+---
+
+### Archivos generados
+- `modelado_predictivo_usando_regresion_lineal_dia4.ipynb`
+- `modelado_predictivo_usando_regresion_lineal_dia4.xlsx`
+- `resultados_modelado_clv_regresion_lineal_dia4.png`
+
+---
+
 ## Días Pendientes
 
 Los siguientes días se desarrollarán progresivamente y se documentarán una vez completados.
 
-- Día 4
 - Día 5
 
 ---
@@ -223,6 +298,10 @@ estadistica-analisis-datos/
 │   ├── anova_segmentacion_clientes_dia3.ipynb
 │   ├── resultados_anova_segmentacion_clientes_dia3.xlsx
 │   ├── resultados_anova_segmentacion_clientes_dia3.png
+├── dia_4/
+│   ├── modelado_predictivo_usando_regresion_lineal_dia4.ipynb
+│   ├── modelado_predictivo_usando_regresion_lineal_dia4.xlsx
+│   ├── resultados_modelado_clv_regresion_lineal_dia4.png
 ├── .gitignore
 
 ```
