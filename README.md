@@ -1,7 +1,6 @@
 # Estadística para Análisis de Datos  
 
-Este repositorio documenta el desarrollo práctico del módulo de Estadística para Análisis de Datos, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, pruebas de hipótesis, análisis de poder y validación empírica mediante simulación y análisis reproducible en Python.
-
+Este repositorio documenta el desarrollo práctico del módulo de Estadística para Análisis de Datos, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, análisis de varianza (ANOVA), pruebas de hipótesis, análisis de poder y validación empírica mediante simulación y análisis reproducible en Python.
 El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, reproducible y orientado a análisis de datos reales.
 
 ---
@@ -14,6 +13,7 @@ El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, repro
 - Aplicar el Teorema del Límite Central para justificar inferencia paramétrica.
 - Desarrollar análisis reproducibles y documentados para portafolio profesional.
 - Tomar decisiones basadas en datos mediante pruebas de hipótesis, tamaños del efecto y análisis de poder estadístico.
+- Comparar múltiples grupos mediante ANOVA y pruebas post-hoc, controlando el error tipo I en contextos de negocio reales.
 
 ---
 
@@ -98,11 +98,74 @@ La prueba de proporciones no rechaza H₀ para la tasa de conversión (Z = 1.12,
 
 ---
 
+## Día 3 – Análisis de Varianza (ANOVA) y Segmentación de Clientes por Canal
+
+### Actividades realizadas
+- Simulación de un dataset de **Valor de Vida del Cliente (CLV)** segmentado por canal de adquisición.
+- Definición de cinco canales con tamaños de muestra desbalanceados.
+- Verificación de supuestos del ANOVA:
+  - Normalidad por grupo (Shapiro-Wilk).
+  - Homocedasticidad de varianzas (prueba de Levene).
+- Selección del método estadístico adecuado según los supuestos:
+  - Uso de **Welch ANOVA** ante varianzas desiguales.
+- Contraste global de igualdad de medias entre canales.
+- Identificación de diferencias específicas mediante pruebas post-hoc:
+  - T-test de Welch por pares.
+  - Corrección de Bonferroni para control del error tipo I.
+- Generación de visualizaciones estadísticas y resumen ejecutivo.
+- Exportación del dataset original y de todas las tablas de resultados a Excel.
+
+---
+
+### Pregunta Estadística
+
+¿El Valor de Vida del Cliente (CLV) promedio es igual entre los distintos canales de adquisición?
+
+---
+
+### Hipótesis
+
+- **H₀**: μ₁ = μ₂ = μ₃ = μ₄ = μ₅  
+  (El CLV promedio es igual en todos los canales)
+
+- **H₁**: Al menos una media es diferente
+
+---
+
+### Verificación
+
+La prueba de Levene rechaza la igualdad de varianzas (p ≪ 0.05), por lo que no se cumple el supuesto de homocedasticidad. En consecuencia, se utiliza **Welch ANOVA**, robusto a varianzas desiguales y tamaños muestrales distintos.
+
+El test de Welch arroja un estadístico F elevado (F ≈ 30.45) con un valor p extremadamente pequeño (p ≈ 5.8e-17), lo que lleva a **rechazar H₀**. Existen diferencias estadísticamente significativas en el CLV promedio entre los canales de adquisición.
+
+Las pruebas post-hoc con corrección de Bonferroni permiten identificar qué pares de canales presentan diferencias significativas, evidenciando que no todos los canales generan el mismo valor económico.
+
+---
+
+### Evidencia generada
+- Tests de normalidad y homocedasticidad.
+- Resultado del Welch ANOVA.
+- Tabla de comparaciones pareadas con p-values ajustados.
+- Visualizaciones:
+  - Boxplot de CLV por canal.
+  - Medias con error estándar.
+  - Matriz de diferencias significativas.
+  - Resumen ejecutivo gráfico.
+- Dataset original y resultados exportados a Excel.
+
+---
+
+### Archivos generados
+- `anova_segmentacion_clientes_dia3.ipynb`
+- `resultados_anova_segmentacion_clientes_dia3.xlsx`
+- `resultados_anova_segmentacion_clientes_dia3.png`
+
+---
+
 ## Días Pendientes
 
 Los siguientes días se desarrollarán progresivamente y se documentarán una vez completados.
 
-- Día 3
 - Día 4
 - Día 5
 
@@ -156,6 +219,10 @@ estadistica-analisis-datos/
 │   ├── prueba_hipotesis_marketing_dia2.ipynb
 │   ├── resultados_marketing_dia2.xlsx
 │   ├── resultados_prueba_hipotesis_marketing_dia2.png
+├── dia_3/
+│   ├── anova_segmentacion_clientes_dia3.ipynb
+│   ├── resultados_anova_segmentacion_clientes_dia3.xlsx
+│   ├── resultados_anova_segmentacion_clientes_dia3.png
 ├── .gitignore
 
 ```
