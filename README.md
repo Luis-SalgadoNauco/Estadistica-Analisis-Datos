@@ -1,6 +1,6 @@
 # Estadística para Análisis de Datos  
 
-Este repositorio documenta el desarrollo práctico del módulo de **Estadística para Análisis de Datos**, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, pruebas de hipótesis, análisis de varianza (ANOVA) y **modelado predictivo mediante regresión lineal**, con validación empírica de supuestos y análisis reproducible en Python.
+Este repositorio documenta el desarrollo práctico del módulo de **Estadística para Análisis de Datos**, enfocado en estadística descriptiva, distribuciones probabilísticas, inferencia estadística, pruebas de hipótesis, análisis de varianza (ANOVA), **técnicas no paramétricas y bootstrap**, y **modelado predictivo mediante regresión lineal**, con validación empírica de supuestos y análisis reproducible en Python.
 
 El trabajo se desarrolla en **5 días**, siguiendo un enfoque incremental, reproducible y orientado a análisis de datos reales.
 
@@ -239,17 +239,88 @@ Los supuestos del modelo se cumplen adecuadamente: los residuos presentan **norm
 
 ---
 
-## Días Pendientes
+## Día 5 – Análisis Robusto de Segmentación de Clientes con Técnicas No Paramétricas
 
-Los siguientes días se desarrollarán progresivamente y se documentarán una vez completados.
-
-- Día 5
+### Actividades realizadas
+- Generación de un conjunto de datos con **distribuciones no normales**:
+  - Gasto total: distribución **exponencial** (asimétrica y con outliers).
+  - Frecuencia de visitas: **Poisson** (variable discreta).
+  - Satisfacción: **Beta** acotada entre 0 y 10.
+- Estimación de intervalos de confianza mediante **bootstrap no paramétrico**.
+- Verificación formal de no normalidad mediante **Shapiro-Wilk**.
+- Cálculo de **estadísticas descriptivas robustas**:
+  - Mediana.
+  - Rango intercuartil (IQR).
+- Comparación global de segmentos de clientes (**Bronce, Plata y Oro**) usando:
+  - **Kruskal-Wallis** como alternativa no paramétrica al ANOVA.
+- Identificación de diferencias específicas entre segmentos mediante:
+  - Pruebas **Mann-Whitney U** pareadas.
+  - Corrección de **Bonferroni** para control del error tipo I.
+- Generación y guardado de visualizaciones del análisis.
+- Exportación del dataset original y de todas las tablas de resultados a un único archivo Excel.
 
 ---
 
-## Conclusiones Finales *(a completar al finalizar los 5 días)*
+### Pregunta Estadística
 
-En esta sección se integrarán los aprendizajes estadísticos, las decisiones metodológicas y las conclusiones generales obtenidas a lo largo del módulo, destacando el valor del enfoque probabilístico y la inferencia estadística aplicada al análisis de datos empresariales.
+¿Existen diferencias estadísticamente significativas en el gasto total entre los distintos segmentos de clientes cuando no se cumplen los supuestos de normalidad?
+
+---
+
+### Hipótesis
+
+- **H₀**: Las distribuciones de gasto total son iguales entre los segmentos.
+- **H₁**: Al menos un segmento presenta una distribución (mediana) de gasto distinta.
+
+---
+
+### Verificación
+
+Las pruebas de normalidad rechazan la hipótesis de normalidad para las variables clave (p ≪ 0.05), confirmando la presencia de asimetrías y outliers. Por este motivo, el uso de pruebas paramétricas como ANOVA no es apropiado.
+
+La prueba de **Kruskal-Wallis** arroja un estadístico H significativo (p < 0.001), lo que indica diferencias globales entre los segmentos. Las comparaciones post-hoc con **Mann-Whitney U** y corrección de Bonferroni muestran diferencias significativas entre los segmentos Bronce–Plata y Bronce–Oro, mientras que no se detectan diferencias significativas entre Plata y Oro.
+
+El uso de estadísticas robustas y pruebas basadas en rangos garantiza conclusiones confiables aun cuando los supuestos clásicos del modelo paramétrico están violados. Los intervalos de confianza obtenidos mediante **bootstrap** refuerzan la interpretación al no depender de supuestos de normalidad y proporcionar estimaciones más estables de la incertidumbre.
+
+Este análisis cierra el módulo abordando escenarios realistas donde los supuestos paramétricos no se cumplen, consolidando un enfoque estadístico robusto y aplicable a datos empresariales complejos.
+
+---
+
+### Evidencia generada
+
+- Resultados del test de normalidad Shapiro-Wilk.
+- Tabla de estadísticas robustas (mediana e IQR) por segmento.
+- Resultado global de Kruskal-Wallis.
+- Tabla de comparaciones post-hoc con p-values ajustados.
+- Visualizaciones comparativas del gasto por segmento.
+- Dataset original y tablas de resultados exportadas a Excel.
+
+---
+
+### Archivos generados
+
+- `analisis_robusto_con_tecnicas_no_parametricas_dia5.ipynb`
+- `resultados_no_parametricos_dia5.xlsx`
+- `resultados_no_parametricos_dia5.png`
+
+---
+
+## Conclusiones Finales
+
+Este proyecto demuestra una aplicación progresiva y rigurosa de la estadística al análisis de datos, avanzando desde la descripción básica hasta técnicas robustas y modelado predictivo, siempre con validación empírica de supuestos y enfoque reproducible.
+
+A lo largo de los cinco días se consolidan los siguientes aprendizajes clave:
+
+- Los datos reales rara vez cumplen supuestos ideales de normalidad, lo que exige seleccionar modelos y pruebas estadísticas adecuadas al proceso generador de datos.
+- El **Teorema del Límite Central** justifica el uso de inferencia paramétrica sobre medias muestrales, pero no sobre datos crudos altamente asimétricos.
+- Las **pruebas de hipótesis** permiten cuantificar evidencia estadística, pero deben complementarse con tamaños del efecto, poder estadístico y contexto de negocio.
+- El **ANOVA** y sus variantes robustas (Welch) son fundamentales para comparar múltiples grupos cuando existen diferencias estructurales en varianzas y tamaños muestrales.
+- La **regresión lineal** es una herramienta poderosa tanto explicativa como predictiva, siempre que se validen exhaustivamente sus supuestos y se interpreten los coeficientes desde una perspectiva económica.
+- Las **técnicas no paramétricas y bootstrap** proporcionan inferencias confiables cuando los supuestos clásicos se violan, reforzando la robustez de las conclusiones.
+
+En conjunto, el repositorio refleja buenas prácticas de análisis de datos aplicadas a contextos empresariales reales, integrando teoría estadística, simulación, validación empírica y comunicación clara de resultados, con un enfoque orientado a toma de decisiones basada en evidencia.
+
+Este trabajo demuestra la capacidad de seleccionar, justificar y aplicar métodos estadísticos adecuados según la naturaleza de los datos, una competencia clave en análisis de datos aplicado.
 
 ---
 
@@ -303,6 +374,10 @@ estadistica-analisis-datos/
 │   ├── modelado_predictivo_usando_regresion_lineal_dia4.ipynb
 │   ├── modelado_predictivo_usando_regresion_lineal_dia4.xlsx
 │   ├── resultados_modelado_clv_regresion_lineal_dia4.png
+├── dia_5/
+│   ├── analisis_robusto_con_tecnicas_no_parametricas_dia5.ipynb
+│   ├── resultados_no_parametricos_dia5.xlsx
+│   ├── resultados_no_parametricos_dia5.png
 ├── .gitignore
 
 ```
