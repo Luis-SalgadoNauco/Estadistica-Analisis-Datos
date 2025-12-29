@@ -213,6 +213,7 @@ Las pruebas post-hoc con corrección de Bonferroni permiten identificar qué par
 El coeficiente de **ingresos** (β ≈ 0.020) indica que, manteniendo constantes las demás variables, **un aumento de $1 en ingresos incrementa el CLV esperado en aproximadamente $0.02**, es decir, **$20 adicionales en CLV por cada $1.000 de ingresos**. El efecto es estadísticamente significativo (p < 0.001) y su intervalo de confianza no incluye cero, por lo que se rechaza H₀.
 
 Los supuestos del modelo se cumplen adecuadamente: los residuos presentan **normalidad** (Shapiro p > 0.05), **homocedasticidad** (Breusch-Pagan p > 0.05), **independencia** (Durbin-Watson ≈ 2) y **ausencia de multicolinealidad** (VIF ≈ 1). La presencia de posibles valores atípicos observados gráficamente no invalida el modelo, pero podría afectar la estabilidad de las predicciones extremas, por lo que en aplicaciones reales se recomienda un análisis robusto adicional.
+
 ---
 
 ### Evidencia generada
